@@ -31,3 +31,4 @@
 /home/teknikprogrammet/Dokument/Programmering/Pong/obj/Debug/net8.0/Pong.pdb
 /home/teknikprogrammet/Dokument/Programmering/Pong/obj/Debug/net8.0/Pong.genruntimeconfig.cache
 /home/teknikprogrammet/Dokument/Programmering/Pong/obj/Debug/net8.0/ref/Pong.dll
+/home/teknikprogrammet/Dokument/Programmering/Pong/obj/Debug/net8.0/Pong.sourcelink.json
