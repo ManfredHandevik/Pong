@@ -12,6 +12,12 @@ public class Game1 : Game
     Texture2D pixel;
     Rectangle leftPaddle = new Rectangle(0, 0, 20, 100);
 
+    Rectangle rightPaddle = new Rectangle(780, 0, 20, 100);
+
+     Rectangle ball = new Rectangle(390, 250, 20, 20);
+    int ballSpeedX = 5;
+    int ballSpeedY = 5;
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -44,23 +50,40 @@ public class Game1 : Game
 
         if (kState.IsKeyDown(Keys.W) && leftPaddle.Y > 0)
         {
-            leftPaddle.Y--;
+            leftPaddle.Y-=5;
         }
-        if (kState.IsKeyDown(Keys.S)&& leftPaddle.Y < 380)
+        if (kState.IsKeyDown(Keys.S)&& leftPaddle.Bottom < 480)
         {
-            leftPaddle.Y++;
+            leftPaddle.Y+=5;
         }
-        if (kState.IsKeyDown(Keys.D)&& leftPaddle.X < 700)
+        if (kState.IsKeyDown(Keys.Up) && rightPaddle.Y > 0)
         {
-            leftPaddle.X++;
+            rightPaddle.Y-=5;
         }
-        if (kState.IsKeyDown(Keys.A)&& leftPaddle.X > 0)
+        if (kState.IsKeyDown(Keys.Down)&& rightPaddle.Bottom < 480)
         {
-            leftPaddle.X--;
+            rightPaddle.Y+=5;
+        }
+
+        ball.X += ballSpeedX;
+        ball.Y += ballSpeedY;
+        if (ball.Bottom >= 480)
+        {
+            ball.Y = 480 - ball.Height;
+            ballSpeedY *= -1;
+        }
+        if (ball.Y <= 0)
+        {
+            ball.Y = 0;
+            ballSpeedY *= -1;
+        }
+        if (ball.Intersects(leftPaddle) || ball.Intersects(rightPaddle))
+        {
+            ballSpeedX *= -1;
         }
         // TODO: Add your update logic here
 
-        base.Update(gameTime);
+            base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
@@ -69,6 +92,8 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
         _spriteBatch.Draw(pixel, leftPaddle, Color.DarkOrange);
+        _spriteBatch.Draw(pixel, rightPaddle, Color.DarkOrange);
+        _spriteBatch.Draw(pixel, ball, Color.DarkMagenta);
 
         _spriteBatch.End();
 
